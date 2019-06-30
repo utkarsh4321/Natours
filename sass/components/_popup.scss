@@ -1,0 +1,103 @@
+.popup {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba($color-black, 0.8);
+  z-index: 10000;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  background-color: rgba($color-black, 0.1);
+  // Implementing the featured queries
+  @supports (-webkit-backdrop-filter: blur(10px)) or
+    (backdrop-filter: blur(10px)) {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    background-color: rgba($color-black, 0.1);
+  }
+  &:target {
+    opacity: 1;
+    visibility: visible;
+  }
+  &:target &__content {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  &__close {
+    &:link,
+    &:visited {
+      color: $color-grey-dark;
+      position: absolute;
+      top: 2.5rem;
+      right: 2.5rem;
+      font-size: 3rem;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.2s;
+      line-height: 1;
+    }
+    &:hover {
+      color: $color-primary;
+    }
+  }
+  &__content {
+    width: 75%;
+
+    background-color: $color-white;
+    box-shadow: 0 2rem 4rem rgba($color-white, 0.2);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.25);
+    border-radius: 3px;
+    display: table;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.5s 0.2s;
+    @include responds(tab-port) {
+      display: block;
+    }
+  }
+  &__left {
+    width: 33.3333%;
+    display: table-cell;
+    border: none;
+    @include responds(tab-port) {
+      width: 100%;
+      display: block;
+      column-count: 2;
+      column-gap: 0;
+      column-fill: balance;
+    }
+  }
+  &__right {
+    width: 66.66667%;
+    display: table-cell;
+    vertical-align: middle;
+    padding: 3rem 5rem;
+    @include responds(tab-port) {
+      width: 100%;
+      display: block;
+      vertical-align: baseline;
+    }
+  }
+  &__img {
+    display: block;
+    width: 100%;
+    height: 20rem;
+  }
+  &__text {
+    font-size: 1.4rem;
+    margin-bottom: 4rem;
+    column-count: 2;
+    column-gap: 4rem; //1em = 14px;
+    column-rule: 1px solid $color-grey-light-2;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    text-align: justify;
+    -moz-hyphens: auto;
+  }
+}

@@ -1,0 +1,37 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+html {
+  // This is define what 1rem setting
+  font-size: 62.5%; // Here we do 1rem = 10px => 10px/16px = 62/5%;
+
+  @include responds(tab-land) {
+    //width < 1200?
+    font-size: 56.25%; //1rem = 9px 9/16  = 50%
+  }
+  @include responds(tab-port) {
+    //width < 900?
+    font-size: 50%; // 1rem = 8px, 8/16 = 50%
+  }
+
+  @include responds(big-desktop) {
+    //width > 1800px
+    font-size: 75%; //1rem = 12px 12/16
+  }
+}
+body {
+  box-sizing: border-box;
+  padding: 3rem;
+  @include responds(tab-port) {
+    //width < 600?
+    padding: 0; // 1rem = 8px, 8/16 = 50%
+  }
+}
+::selection {
+  background-color: $color-primary;
+  color: $color-white;
+}

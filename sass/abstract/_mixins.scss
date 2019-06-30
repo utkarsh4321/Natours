@@ -1,0 +1,64 @@
+@mixin clearFix {
+  &::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+}
+@mixin cardsPictures($color1, $color2, $url) {
+  background-image: linear-gradient(to right bottom, $color1, $color2),
+    url($url);
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+}
+@mixin background($color1, $color2, $alpha1, $alpha2) {
+  background-image: linear-gradient(
+    to right bottom,
+    rgba($color1, $alpha1),
+    rgba($color2, $alpha2)
+  );
+}
+// MEDIA QURIES MANAGER
+/*
+0 - 600px Phone
+600 - 900px Tablet Portrait
+900px - 1200px Tablet landscape
+1200px - 1800px is where our normal styles apply
+1800px + Big desktop
+*/
+// BREAkpoints for each device
+/*
+- Phone 
+- tab-port
+- tab-land
+- big-desktop
+*/
+// order - Base + typography > layout > grid >component
+// Mixin for the all breakpoints
+
+@mixin responds($breakpoint) {
+  @if $breakpoint == phone {
+    @media only screen and (max-width: 37.5em) {
+      //600px we are changing the unit into the em best option
+      @content;
+    }
+  }
+  @if $breakpoint == tab-port {
+    @media only screen and (max-width: 56.25em) {
+      //900 px
+      @content;
+    }
+  }
+  @if $breakpoint == tab-land {
+    @media only screen and (max-width: 75em) {
+      // 1200px
+      @content;
+    }
+  }
+  @if $breakpoint == big-desktop {
+    @media only screen and (min-width: 112.5em) {
+      //1800px
+      @content;
+    }
+  }
+}
